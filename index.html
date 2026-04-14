@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JINGA — The Filter Your Partner Controls. Not You.</title>
+<title>JINTA — The Filter Your Partner Controls. Not You.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ranchers&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@
     position: sticky;
     top: 0;
     z-index: 90;
-    background: var(--white);
+    background: var(--dark);
     border-bottom: 4px solid var(--black);
     padding: 0 40px;
     height: 70px;
@@ -85,25 +85,23 @@
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     text-decoration: none;
   }
   .logo-mark {
-    width: 40px;
-    height: 40px;
-    background: var(--black);
+    width: auto;
+    height: auto;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: rotate(3deg);
     flex-shrink: 0;
   }
-  .logo-mark svg { transform: rotate(-3deg); }
   .logo-text {
     font-family: var(--font-body);
     font-weight: 800;
     font-size: 26px;
-    color: var(--black);
+    color: var(--white);
     letter-spacing: -0.02em;
   }
   .nav-right {
@@ -111,38 +109,26 @@
     align-items: center;
     gap: 16px;
   }
-  .nav-badge {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--black);
-    background: var(--volt);
-    border: 4px solid var(--black);
-    padding: 6px 14px;
-    box-shadow: 4px 4px 0 var(--black);
-  }
   .btn-nav {
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--white);
-    background: var(--black);
-    border: 4px solid var(--black);
+    color: var(--black);
+    background: var(--volt);
+    border: 4px solid var(--volt);
     padding: 10px 20px;
     cursor: pointer;
     text-decoration: none;
-    box-shadow: 4px 4px 0 var(--grey-text);
+    box-shadow: 4px 4px 0 rgba(204,255,0,0.3);
     transition: transform 0.1s, box-shadow 0.1s;
     display: inline-block;
     border-radius: 8px;
   }
   .btn-nav:hover {
-    transform: translate(4px, 4px);
-    box-shadow: 0 0 0 var(--grey-text);
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 rgba(204,255,0,0.3);
   }
 
   /* HERO */
@@ -184,7 +170,7 @@
   }
   .hero-headline {
     font-family: var(--font-display);
-    font-size: clamp(72px, 10vw, 148px);
+    font-size: clamp(64px, 10vw, 148px);
     line-height: 0.88;
     color: var(--white);
     text-shadow: 7px 7px 0 var(--black);
@@ -196,11 +182,11 @@
   .hero-headline .volt { color: var(--volt); }
   .hero-sub {
     font-family: var(--font-body);
-    font-size: clamp(18px, 2.5vw, 26px);
+    font-size: clamp(18px, 2.5vw, 24px);
     font-weight: 400;
     font-style: italic;
     color: rgba(255,255,255,0.7);
-    max-width: 580px;
+    max-width: 620px;
     line-height: 1.45;
     margin-top: 24px;
     margin-bottom: 48px;
@@ -319,7 +305,7 @@
   }
   .comparison-header h2 {
     font-family: var(--font-display);
-    font-size: clamp(44px, 6vw, 78px);
+    font-size: clamp(40px, 6vw, 78px);
     line-height: 0.9;
     color: var(--white);
     text-shadow: 5px 5px 0 var(--black);
@@ -352,7 +338,7 @@
   .comp-new .comp-tag { color: #555; }
   .comp-title {
     font-family: var(--font-display);
-    font-size: clamp(36px, 5vw, 64px);
+    font-size: clamp(32px, 5vw, 64px);
     line-height: 0.9;
   }
   .comp-old .comp-title { color: var(--grey-text); }
@@ -382,7 +368,7 @@
   }
   .process-header h2 {
     font-family: var(--font-display);
-    font-size: clamp(44px, 6vw, 80px);
+    font-size: clamp(40px, 6vw, 80px);
     line-height: 0.9;
     color: var(--white);
     text-shadow: 5px 5px 0 var(--black);
@@ -463,7 +449,7 @@
   }
   .why h2 {
     font-family: var(--font-display);
-    font-size: clamp(44px, 6vw, 80px);
+    font-size: clamp(40px, 6vw, 80px);
     line-height: 0.9;
     color: var(--black);
     text-shadow: 5px 5px 0 var(--volt);
@@ -521,7 +507,7 @@
   }
   .cta-section h2 {
     font-family: var(--font-display);
-    font-size: clamp(52px, 7vw, 100px);
+    font-size: clamp(48px, 7vw, 100px);
     line-height: 0.88;
     color: var(--black);
     text-shadow: 5px 5px 0 rgba(0,0,0,0.15);
@@ -591,6 +577,9 @@
     gap: 20px;
   }
   .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-family: var(--font-display);
     font-size: 36px;
     color: var(--white);
@@ -633,6 +622,7 @@
     border: 4px solid var(--black);
     padding: 14px 20px;
     box-shadow: 4px 4px 0 var(--black);
+    margin-top: 10px;
   }
 
   /* RESPONSIVE */
@@ -649,11 +639,8 @@
     .stat-item { border-right: none; border-bottom: 4px solid var(--black); padding: 0 0 20px; width: 100%; }
     .stat-item:last-child { border-bottom: none; }
     .hero { padding: 50px 24px; }
-    .proof-bar, .comparison-header, .process, .why, .cta-section, footer { padding: 40px 24px; }
-    .proof-cards { gap: 16px; }
-    .proof-card { max-width: 100%; }
+    .comparison-header, .process, .why, .cta-section, footer { padding: 40px 24px; }
     nav { padding: 0 20px; }
-    .nav-badge { display: none; }
   }
 </style>
 </head>
@@ -673,15 +660,18 @@
   <nav>
     <a href="#" class="nav-logo">
       <div class="logo-mark">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <path d="M11 2L18 6.5V15.5L11 20L4 15.5V6.5L11 2Z" fill="#CCFF00"/>
-          <path d="M11 7V11M11 11V15M11 11H7M11 11H15" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+        <svg width="28" height="34" viewBox="0 0 22 26" fill="none">
+          <rect x="1" y="1" width="20" height="3" rx="1" fill="#CCFF00"/>
+          <rect x="1" y="22" width="20" height="3" rx="1" fill="#CCFF00"/>
+          <path d="M3 4 Q3 13 11 13 Q19 13 19 4Z" fill="#CCFF00"/>
+          <path d="M3 22 Q3 13 11 13 Q19 13 19 22Z" fill="none" stroke="#CCFF00" stroke-width="1.5"/>
+          <path d="M8 17 Q11 14.5 14 17" stroke="#CCFF00" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="11" cy="19.5" r="1.5" fill="#CCFF00"/>
         </svg>
       </div>
-      <span class="logo-text">JINGA</span>
+      <span class="logo-text">JINTA</span>
     </a>
     <div class="nav-right">
-      <span class="nav-badge">Android Beta — Q3 2026</span>
       <a href="#waitlist" class="btn-nav">Join Waitlist</a>
     </div>
   </nav>
@@ -698,13 +688,13 @@
     </h1>
     <p class="hero-sub">
       Every porn blocker you have ever tried can be deleted in 3 seconds.<br>
-      <strong>JINGA is the first app where your accountability partner holds the lock on your porn filter.</strong>
+      <strong>JINTA is the first app where your accountability partner holds the lock on your porn filter.</strong>
       Not an algorithm. Not a parental control. A real person who knows you and will not let you off the hook.
     </p>
-    <div class="waitlist-form-wrap">
+    <div class="waitlist-form-wrap" id="hero-form-container">
       <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email">
       <div class="form-divider"></div>
-      <button onclick="handleSignup('hero-email', 'hero-success')">LOCK IN</button>
+      <button onclick="handleSignup('hero-email', 'hero-success', 'hero-form-container')">LOCK IN</button>
     </div>
     <div class="success-msg" id="hero-success">You are on the list. We will be in touch.</div>
     <p class="hero-subtext">No spam. No daily guilt trips. Just early access when we ship.</p>
@@ -743,9 +733,9 @@
         <p class="comp-body">Every porn blocker on the market can be uninstalled in 3 seconds. The same brain producing the urge to watch porn also controls the tool meant to stop it. That is not a system. That is a coin flip.</p>
       </div>
       <div class="comp-new">
-        <span class="comp-tag">// The JINGA way</span>
+        <span class="comp-tag">// The JINTA way</span>
         <div class="comp-title">PARTNER HOLDS THE KEY</div>
-        <p class="comp-body">Your accountability partner holds the PIN that controls your JINGA settings. They approve every change. They get notified within minutes if anything is tampered with. You cannot disable your own porn filter during a moment of weakness.</p>
+        <p class="comp-body">Your accountability partner holds the PIN that controls your JINTA settings. They approve every change. They get notified within minutes if anything is tampered with. You cannot disable your own porn filter during a moment of weakness.</p>
       </div>
     </div>
     <div class="comp-row">
@@ -755,9 +745,9 @@
         <p class="comp-body">Most porn blockers only work in your browser. Switch to Reddit, Instagram, or Telegram and you are on your own. The places where exposure actually happens go completely unprotected.</p>
       </div>
       <div class="comp-new">
-        <span class="comp-tag">// The JINGA way</span>
+        <span class="comp-tag">// The JINTA way</span>
         <div class="comp-title">EVERY APP. EVERY TIME.</div>
-        <p class="comp-body">JINGA's engine filters at the network level, before content reaches any app on your phone. Browser, social media, messaging apps. One layer that covers everything. No blind spots. No back doors.</p>
+        <p class="comp-body">JINTA's engine filters at the network level, before content reaches any app on your phone. Browser, social media, messaging apps. One layer that covers everything. No blind spots. No back doors.</p>
       </div>
     </div>
     <div class="comp-row">
@@ -767,9 +757,9 @@
         <p class="comp-body">Apps that treat every porn relapse as a moral failure, blast a reset counter in your face, and make you feel surveilled. That shame spiral is clinically documented to increase the behaviour you are trying to stop.</p>
       </div>
       <div class="comp-new">
-        <span class="comp-tag">// The JINGA way</span>
+        <span class="comp-tag">// The JINTA way</span>
         <div class="comp-title">IDENTITY RECOVERY</div>
-        <p class="comp-body">JINGA treats a porn relapse as data, not defeat. A debrief captures what triggered it. Your patterns become insights. Recovery is measured in who you are becoming, not a streak counter that resets to zero and makes you want to quit.</p>
+        <p class="comp-body">JINTA treats a porn relapse as data, not defeat. A debrief captures what triggered it. Your patterns become insights. Recovery is measured in who you are becoming, not a streak counter that resets to zero and makes you want to quit.</p>
       </div>
     </div>
   </section>
@@ -779,7 +769,7 @@
     <div class="process-header">
       <div>
         <span class="process-sub">// Three steps to quitting porn for good</span>
-        <h2>HOW JINGA<br>ACTUALLY WORKS</h2>
+        <h2>HOW JINTA<br>ACTUALLY WORKS</h2>
       </div>
     </div>
     <div class="process-grid">
@@ -792,14 +782,14 @@
       <div class="process-card">
         <span class="step-tag">Step 02</span>
         <div class="step-watermark">2</div>
-        <h3>JINGA Locks Itself In</h3>
+        <h3>JINTA Locks Itself In</h3>
         <p>Our on-device engine starts blocking porn at the network level across every app on your phone. Your partner sets a PIN you never see. Any attempt to delete the app, change settings, or bypass the filter sends them an alert within minutes.</p>
       </div>
       <div class="process-card">
         <span class="step-tag">Step 03</span>
         <div class="step-watermark">3</div>
         <h3>You Build. Not Just Block.</h3>
-        <p>Daily check-ins, a recovery score tracking your real symptoms, an AI coach that learns your specific triggers, and a small peer group walking the same path. JINGA does not just block porn. It helps you understand why you were watching it and who you want to be instead.</p>
+        <p>Daily check-ins, a recovery score tracking your real symptoms, an AI coach that learns your specific triggers, and a small peer group walking the same path. JINTA does not just block porn. It helps you understand why you were watching it and who you want to be instead.</p>
       </div>
     </div>
   </section>
@@ -824,7 +814,7 @@
           </svg>
         </div>
         <h4>People Beat Algorithms</h4>
-        <p>The research is settled. Social accountability outperforms technical blocking every time. JINGA is built around a real human who cares about you, with technology supporting that relationship.</p>
+        <p>The research is settled. Social accountability outperforms technical blocking every time. JINTA is built around a real human who cares about you, with technology supporting that relationship.</p>
       </div>
       <div class="why-item">
         <div class="why-icon">
@@ -833,7 +823,7 @@
           </svg>
         </div>
         <h4>Recovery Is a Direction</h4>
-        <p>Not a number on a streak counter. JINGA tracks sleep quality, focus, relationship satisfaction, and mood. Your score goes up when your life goes up. A relapse does not erase the work you have done.</p>
+        <p>Not a number on a streak counter. JINTA tracks sleep quality, focus, relationship satisfaction, and mood. Your score goes up when your life goes up. A relapse does not erase the work you have done.</p>
       </div>
       <div class="why-item">
         <div class="why-icon">
@@ -842,7 +832,7 @@
           </svg>
         </div>
         <h4>Friction at the Right Moment</h4>
-        <p>Most porn relapses take 3 minutes to complete and years to forget. JINGA adds deliberate friction in that window. Not a wall. A pause long enough for the urge to pass and for your brain to remember why you started.</p>
+        <p>Most porn relapses take 3 minutes to complete and years to forget. JINTA adds deliberate friction in that window. Not a wall. A pause long enough for the urge to pass and for your brain to remember why you started.</p>
       </div>
     </div>
   </section>
@@ -853,15 +843,15 @@
     </div>
     <div class="cta-right">
       <p>
-        <strong>You have tried blockers. You have tried willpower. You have tried deleting apps and reinstalling them the same night.</strong> The issue was never your commitment. It was that you were fighting alone with tools that handed you the off switch. JINGA takes the off switch away from you and gives it to someone who has your back.
+        <strong>You have tried blockers. You have tried willpower. You have tried deleting apps and reinstalling them the same night.</strong> The issue was never your commitment. It was that you were fighting alone with tools that handed you the off switch. JINTA takes the off switch away from you and gives it to someone who has your back.
       </p>
       <p>
         Launching on Android in Q3 2026. Join the waitlist and we will send one message when beta opens. No drip campaign. No daily guilt. Just early access.
       </p>
       <div class="cta-form">
-        <div class="cta-input-row">
+        <div class="cta-input-row" id="cta-form-container">
           <input type="email" id="cta-email" placeholder="Your email address" autocomplete="email">
-          <button onclick="handleSignup('cta-email', 'cta-success')">GET EARLY ACCESS</button>
+          <button onclick="handleSignup('cta-email', 'cta-success', 'cta-form-container')">GET EARLY ACCESS</button>
         </div>
         <div class="success-msg" id="cta-success">You are on the list. We will be in touch.</div>
         <p class="cta-note">One email. No spam. Unsubscribe anytime.</p>
@@ -871,43 +861,121 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">JINGA<span>.</span></div>
+    <div class="footer-logo">
+      <div class="logo-mark" style="transform: scale(0.85); transform-origin: left center;">
+        <svg width="28" height="34" viewBox="0 0 22 26" fill="none">
+          <rect x="1" y="1" width="20" height="3" rx="1" fill="#CCFF00"/>
+          <rect x="1" y="22" width="20" height="3" rx="1" fill="#CCFF00"/>
+          <path d="M3 4 Q3 13 11 13 Q19 13 19 4Z" fill="#CCFF00"/>
+          <path d="M3 22 Q3 13 11 13 Q19 13 19 22Z" fill="none" stroke="#CCFF00" stroke-width="1.5"/>
+          <path d="M8 17 Q11 14.5 14 17" stroke="#CCFF00" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="11" cy="19.5" r="1.5" fill="#CCFF00"/>
+        </svg>
+      </div>
+      JINTA<span>.</span>
+    </div>
     <div class="footer-links">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
       <a href="#">Contact</a>
       <a href="#">For Therapists</a>
     </div>
-    <p class="footer-copy">2026 JINGA. Built with purpose.</p>
+    <p class="footer-copy">2026 JINTA. Built with purpose.</p>
   </footer>
 
 </div>
 
+<!-- Supabase JS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-function handleSignup(inputId, successId) {
-  const input = document.getElementById(inputId);
-  const success = document.getElementById(successId);
-  const email = input.value.trim();
-  if (!email || !email.includes('@')) {
-    input.style.border = '3px solid red';
-    setTimeout(() => input.style.border = '', 1000);
-    return;
-  }
-  const formWrap = input.closest('.waitlist-form-wrap') || input.closest('.cta-input-row');
-  if (formWrap) formWrap.style.display = 'none';
-  success.style.display = 'block';
-}
+  // Configuration from Vercel Environment Variables
+  // (Safe fallback to prevent crashing if process is undefined in raw HTML)
+  const SUPABASE_URL = typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_SUPABASE_URL : '';
+  const SUPABASE_ANON_KEY = typeof process !== 'undefined' ? process.env.NEXT_SUPABASE_ANON_KEY : '';
 
-document.querySelectorAll('input[type="email"]').forEach(input => {
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const btn = input.nextElementSibling && input.nextElementSibling.nextElementSibling
-        ? input.nextElementSibling.nextElementSibling
-        : input.parentElement.querySelector('button');
-      if (btn) btn.click();
+  // Check if credentials are missing
+  const isDemo = !SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_URL.includes('YOUR_PROJECT_ID');
+  
+  let supabase = null;
+  if (!isDemo) {
+    try {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    } catch (e) {
+      console.error("Supabase init failed", e);
     }
+  }
+
+  async function handleSignup(inputId, successId, containerId) {
+    const input = document.getElementById(inputId);
+    const success = document.getElementById(successId);
+    const container = document.getElementById(containerId);
+    const email = input.value.trim();
+
+    // Basic validation
+    if (!email || !email.includes('@')) {
+      input.style.border = '3px solid #ff4444';
+      setTimeout(() => input.style.border = '', 1500);
+      return;
+    }
+
+    const btn = container.querySelector('button');
+    if (btn) {
+      btn.textContent = 'SAVING...';
+      btn.disabled = true;
+    }
+
+    // Demo Mode logic
+    if (isDemo || !supabase) {
+      console.log("Demo Mode: Simulated signup for", email);
+      setTimeout(() => {
+        container.style.display = 'none';
+        success.textContent = 'You are on the list! (Preview Mode)';
+        success.style.display = 'block';
+      }, 800);
+      return;
+    }
+
+    // Real Supabase logic
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ email, signed_up_at: new Date().toISOString() }]);
+
+      if (error) {
+        if (error.code === '23505') {
+          success.textContent = 'You are already on the list.';
+          success.style.display = 'block';
+          container.style.display = 'none';
+        } else {
+          throw error;
+        }
+        return;
+      }
+
+      container.style.display = 'none';
+      success.textContent = 'You are on the list. Check your inbox.';
+      success.style.display = 'block';
+
+    } catch (err) {
+      console.error(err);
+      if (btn) {
+        btn.textContent = 'LOCK IN';
+        btn.disabled = false;
+      }
+      // Simple error indicator
+      input.style.border = '3px solid #ff4444';
+    }
+  }
+
+  // Handle Enter Key
+  document.querySelectorAll('input[type="email"]').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const btn = input.parentElement.querySelector('button');
+        if (btn) btn.click();
+      }
+    });
   });
-});
 </script>
 </body>
 </html>
