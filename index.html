@@ -170,13 +170,13 @@
   }
   .hero-headline {
     font-family: var(--font-display);
-    font-size: clamp(64px, 10vw, 148px);
-    line-height: 0.88;
+    font-size: clamp(48px, 7vw, 100px); 
+    line-height: 0.95; 
     color: var(--white);
-    text-shadow: 7px 7px 0 var(--black);
+    text-shadow: 5px 5px 0 var(--black);
     position: relative;
     z-index: 2;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     max-width: 900px;
   }
   .hero-headline .volt { color: var(--volt); }
@@ -203,7 +203,7 @@
     border: 4px solid var(--black);
     box-shadow: 8px 8px 0 var(--volt);
     background: var(--white);
-    max-width: 540px;
+    max-width: 680px;
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
@@ -218,6 +218,7 @@
     color: var(--black);
     background: var(--white);
     letter-spacing: 0.04em;
+    min-width: 0;
   }
   .waitlist-form-wrap input::placeholder { color: #999; text-transform: uppercase; }
   .form-divider { width: 4px; background: var(--black); flex-shrink: 0; }
@@ -507,8 +508,8 @@
   }
   .cta-section h2 {
     font-family: var(--font-display);
-    font-size: clamp(48px, 7vw, 100px);
-    line-height: 0.88;
+    font-size: clamp(40px, 6vw, 80px); 
+    line-height: 0.95;
     color: var(--black);
     text-shadow: 5px 5px 0 rgba(0,0,0,0.15);
   }
@@ -525,47 +526,7 @@
     flex-direction: column;
     gap: 12px;
   }
-  .cta-input-row {
-    display: flex;
-    border: 4px solid var(--black);
-    box-shadow: 8px 8px 0 var(--black);
-    background: var(--white);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .cta-input-row input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 18px 22px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--black);
-    background: var(--white);
-    letter-spacing: 0.04em;
-  }
-  .cta-input-row input::placeholder { color: #999; text-transform: uppercase; }
-  .cta-input-row button {
-    border: none;
-    border-left: 4px solid var(--black);
-    padding: 18px 30px;
-    font-family: var(--font-display);
-    font-size: 22px;
-    color: var(--white);
-    background: var(--black);
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    white-space: nowrap;
-  }
-  .cta-input-row button:hover { background: var(--dark); }
-  .cta-note {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(0,0,0,0.45);
-  }
-
+  
   /* FOOTER */
   footer {
     background: var(--black);
@@ -643,6 +604,21 @@
     .comparison-header, .process, .why, .cta-section, footer { padding: 40px 24px; }
     nav { padding: 0 20px; }
   }
+
+  /* MOBILE FORM ADJUSTMENTS */
+  @media (max-width: 600px) {
+    .waitlist-form-wrap {
+      flex-direction: column;
+      border-radius: 8px;
+    }
+    .form-divider {
+      width: 100%;
+      height: 4px;
+    }
+    .waitlist-form-wrap button {
+      border-left: none;
+    }
+  }
 </style>
 </head>
 <body>
@@ -693,9 +669,11 @@
       Not an algorithm. Not a parental control. A real person who knows you and will not let you off the hook.
     </p>
     <div class="waitlist-form-wrap" id="hero-form-container">
+      <input type="text" id="hero-name" placeholder="Nickname (Optional)" autocomplete="given-name">
+      <div class="form-divider"></div>
       <input type="email" id="hero-email" placeholder="Your email address" autocomplete="email">
       <div class="form-divider"></div>
-      <button onclick="handleSignup('hero-email', 'hero-success', 'hero-form-container')">LOCK IN</button>
+      <button onclick="handleSignup('hero-email', 'hero-name', 'hero-success', 'hero-form-container')">LOCK IN</button>
     </div>
     <div class="success-msg" id="hero-success">You are on the list. We will be in touch.</div>
     <p class="hero-subtext">No spam. No daily guilt trips. Just early access when we ship.</p>
@@ -850,9 +828,12 @@
         Launching on Android in Q3 2026. Join the waitlist and we will send one message when beta opens. No drip campaign. No daily guilt. Just early access.
       </p>
       <div class="cta-form">
-        <div class="cta-input-row" id="cta-form-container">
+        <div class="waitlist-form-wrap" id="cta-form-container">
+          <input type="text" id="cta-name" placeholder="Nickname (Optional)" autocomplete="given-name">
+          <div class="form-divider"></div>
           <input type="email" id="cta-email" placeholder="Your email address" autocomplete="email">
-          <button onclick="handleSignup('cta-email', 'cta-success', 'cta-form-container')">GET EARLY ACCESS</button>
+          <div class="form-divider"></div>
+          <button onclick="handleSignup('cta-email', 'cta-name', 'cta-success', 'cta-form-container')">GET EARLY ACCESS</button>
         </div>
         <div class="success-msg" id="cta-success">You are on the list. We will be in touch.</div>
         <p class="cta-note">One email. No spam. Unsubscribe anytime.</p>
@@ -886,24 +867,27 @@
 
 </div>
 
-<!-- Direct API logic (No external libraries required) -->
+<!-- Direct API logic -->
 <script>
-  async function handleSignup(inputId, successId, containerId) {
-    const input = document.getElementById(inputId);
+  async function handleSignup(emailInputId, nameInputId, successId, containerId) {
+    const emailInput = document.getElementById(emailInputId);
+    const nameInput = document.getElementById(nameInputId);
     const success = document.getElementById(successId);
     const container = document.getElementById(containerId);
-    const email = input.value.trim();
+    
+    const email = emailInput.value.trim();
+    const name = nameInput ? nameInput.value.trim() : '';
 
     // Reset styles for a fresh attempt
     success.style.display = 'none';
     success.style.backgroundColor = 'var(--volt)';
     success.style.color = 'var(--black)';
-    input.style.border = 'none';
+    emailInput.style.border = 'none';
 
     // Basic validation
     if (!email || !email.includes('@')) {
-      input.style.border = '3px solid #ff4444';
-      setTimeout(() => input.style.border = 'none', 1500);
+      emailInput.style.border = '3px solid #ff4444';
+      setTimeout(() => emailInput.style.border = 'none', 1500);
       return;
     }
 
@@ -916,7 +900,6 @@
     }
 
     try {
-      // 100% Native, reliable REST call. Bypasses external JS libraries entirely.
       const SUPABASE_URL = 'https://vemognokcqejzvepqipy.supabase.co';
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlbW9nbm9rY3Flanp2ZXBxaXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNzU3NDEsImV4cCI6MjA5MTc1MTc0MX0.QQqb6xE3uKq6dXyNOVTpLXc6qATyj0NborIid5bUKNI';
 
@@ -926,24 +909,19 @@
           'apikey': SUPABASE_ANON_KEY,
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
-          'Prefer': 'return=minimal' // Optimizes request by not asking for data back
+          'Prefer': 'return=minimal' 
         },
-        body: JSON.stringify({ email: email })
+        body: JSON.stringify({ email: email, name: name || null })
       });
 
       if (!response.ok) {
-        // If Supabase throws an error (duplicate, permissions, RLS), catch it here
         const errorData = await response.json().catch(() => ({}));
-        
-        // Handle Duplicate Email (Postgres error 23505)
         if (errorData.code === '23505') {
           success.textContent = 'You are already on the list.';
           success.style.display = 'block';
           container.style.display = 'none';
           return;
         }
-        
-        // Force the explicit error out onto the screen
         throw new Error(errorData.message || errorData.hint || `HTTP Error ${response.status}`);
       }
 
@@ -954,15 +932,11 @@
 
     } catch (err) {
       console.error("Signup Error:", err);
-      
-      // Reset button and input
       if (btn) {
         btn.textContent = originalBtnText;
         btn.disabled = false;
       }
-      input.style.border = '3px solid #ff4444';
-      
-      // Print the exact reason it failed right on the screen so you aren't guessing
+      emailInput.style.border = '3px solid #ff4444';
       success.textContent = 'Error: ' + err.message;
       success.style.backgroundColor = '#ff4444';
       success.style.color = '#fff';
@@ -970,11 +944,11 @@
     }
   }
 
-  // Handle Enter Key
-  document.querySelectorAll('input[type="email"]').forEach(input => {
+  // Handle Enter Key for both inputs
+  document.querySelectorAll('.waitlist-form-wrap input').forEach(input => {
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        const btn = input.parentElement.querySelector('button');
+        const btn = input.closest('.waitlist-form-wrap').querySelector('button');
         if (btn) btn.click();
       }
     });
