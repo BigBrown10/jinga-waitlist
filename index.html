@@ -886,27 +886,8 @@
 
 </div>
 
-<!-- Supabase JS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Direct API logic (No external libraries required) -->
 <script>
-  // Configuration
-  // In plain HTML, the browser cannot read process.env variables from Vercel.
-  // It is 100% safe to put your Supabase URL and Anon Key here because your RLS policies protect the data.
-  const SUPABASE_URL = 'https://vemognokcqejzvepqipy.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlbW9nbm9rY3Flanp2ZXBxaXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNzU3NDEsImV4cCI6MjA5MTc1MTc0MX0.QQqb6xE3uKq6dXyNOVTpLXc6qATyj0NborIid5bUKNI';
-
-  // Check if credentials are missing
-  const isDemo = !SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_URL.includes('PASTE_');
-  
-  let supabase = null;
-  if (!isDemo) {
-    try {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    } catch (e) {
-      console.error("Supabase init failed", e);
-    }
-  }
-
   async function handleSignup(inputId, successId, containerId) {
     const input = document.getElementById(inputId);
     const success = document.getElementById(successId);
@@ -927,62 +908,65 @@
     }
 
     const btn = container.querySelector('button');
+    const originalBtnText = btn ? btn.textContent : 'SAVING...';
+    
     if (btn) {
       btn.textContent = 'SAVING...';
       btn.disabled = true;
     }
 
-    // Demo Mode logic
-    if (isDemo || !supabase) {
-      console.log("Demo Mode: Simulated signup for", email);
-      setTimeout(() => {
-        container.style.display = 'none';
-        success.textContent = 'You are on the list! (Preview Mode)';
-        success.style.display = 'block';
-      }, 800);
-      return;
-    }
-
-    // Real Supabase logic
     try {
-      // Send ONLY the email. Postgres handles the timestamp creation itself automatically
-      const { error } = await supabase
-        .from('waitlist')
-        .insert([{ email }]);
+      // 100% Native, reliable REST call. Bypasses external JS libraries entirely.
+      const SUPABASE_URL = 'https://vemognokcqejzvepqipy.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlbW9nbm9rY3Flanp2ZXBxaXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNzU3NDEsImV4cCI6MjA5MTc1MTc0MX0.QQqb6xE3uKq6dXyNOVTpLXc6qATyj0NborIid5bUKNI';
 
-      if (error) {
-        if (error.code === '23505') {
-          // Unique constraint error (duplicate email)
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal' // Optimizes request by not asking for data back
+        },
+        body: JSON.stringify({ email: email })
+      });
+
+      if (!response.ok) {
+        // If Supabase throws an error (duplicate, permissions, RLS), catch it here
+        const errorData = await response.json().catch(() => ({}));
+        
+        // Handle Duplicate Email (Postgres error 23505)
+        if (errorData.code === '23505') {
           success.textContent = 'You are already on the list.';
           success.style.display = 'block';
           container.style.display = 'none';
           return;
-        } else {
-          // If it's a different error, force it into the catch block
-          throw error;
         }
+        
+        // Force the explicit error out onto the screen
+        throw new Error(errorData.message || errorData.hint || `HTTP Error ${response.status}`);
       }
 
-      // Success UI changes
+      // Complete Success
       container.style.display = 'none';
       success.textContent = 'You are on the list. Check your inbox.';
       success.style.display = 'block';
 
     } catch (err) {
-      console.error("Supabase Error Caught: ", err);
+      console.error("Signup Error:", err);
       
       // Reset button and input
       if (btn) {
-        btn.textContent = 'LOCK IN';
+        btn.textContent = originalBtnText;
         btn.disabled = false;
       }
       input.style.border = '3px solid #ff4444';
       
-      // Output the explicit error directly to the screen
-      success.textContent = 'Error: ' + (err.message || err.details || 'Connection failed.');
-      success.style.display = 'block';
+      // Print the exact reason it failed right on the screen so you aren't guessing
+      success.textContent = 'Error: ' + err.message;
       success.style.backgroundColor = '#ff4444';
       success.style.color = '#fff';
+      success.style.display = 'block';
     }
   }
 
