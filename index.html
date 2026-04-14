@@ -609,7 +609,7 @@
     letter-spacing: 0.08em;
   }
 
-  /* SUCCESS STATE */
+  /* SUCCESS & ERROR STATE */
   .success-msg {
     display: none;
     font-family: var(--font-mono);
@@ -623,6 +623,7 @@
     padding: 14px 20px;
     box-shadow: 4px 4px 0 var(--black);
     margin-top: 10px;
+    word-break: break-word;
   }
 
   /* RESPONSIVE */
@@ -912,10 +913,16 @@
     const container = document.getElementById(containerId);
     const email = input.value.trim();
 
+    // Reset styles for a fresh attempt
+    success.style.display = 'none';
+    success.style.backgroundColor = 'var(--volt)';
+    success.style.color = 'var(--black)';
+    input.style.border = 'none';
+
     // Basic validation
     if (!email || !email.includes('@')) {
       input.style.border = '3px solid #ff4444';
-      setTimeout(() => input.style.border = '', 1500);
+      setTimeout(() => input.style.border = 'none', 1500);
       return;
     }
 
@@ -938,33 +945,44 @@
 
     // Real Supabase logic
     try {
+      // Send ONLY the email. Postgres handles the timestamp creation itself automatically
       const { error } = await supabase
         .from('waitlist')
-        .insert([{ email, signed_up_at: new Date().toISOString() }]);
+        .insert([{ email }]);
 
       if (error) {
         if (error.code === '23505') {
+          // Unique constraint error (duplicate email)
           success.textContent = 'You are already on the list.';
           success.style.display = 'block';
           container.style.display = 'none';
+          return;
         } else {
+          // If it's a different error, force it into the catch block
           throw error;
         }
-        return;
       }
 
+      // Success UI changes
       container.style.display = 'none';
       success.textContent = 'You are on the list. Check your inbox.';
       success.style.display = 'block';
 
     } catch (err) {
-      console.error(err);
+      console.error("Supabase Error Caught: ", err);
+      
+      // Reset button and input
       if (btn) {
         btn.textContent = 'LOCK IN';
         btn.disabled = false;
       }
-      // Simple error indicator
       input.style.border = '3px solid #ff4444';
+      
+      // Output the explicit error directly to the screen
+      success.textContent = 'Error: ' + (err.message || err.details || 'Connection failed.');
+      success.style.display = 'block';
+      success.style.backgroundColor = '#ff4444';
+      success.style.color = '#fff';
     }
   }
 
