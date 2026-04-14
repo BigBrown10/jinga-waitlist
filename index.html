@@ -98,7 +98,7 @@
     flex-shrink: 0;
   }
   .logo-text {
-    font-family: var(--font-body);
+    font-family: 'Adriana', sans-serif;
     font-weight: 800;
     font-size: 26px;
     color: var(--white);
@@ -580,7 +580,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: var(--font-display);
+    font-family: 'Adriana', sans-serif;
     font-size: 36px;
     color: var(--white);
     letter-spacing: 0.02em;
@@ -888,13 +888,14 @@
 <!-- Supabase JS Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // Configuration from Vercel Environment Variables
-  // (Safe fallback to prevent crashing if process is undefined in raw HTML)
-  const SUPABASE_URL = typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_SUPABASE_URL : '';
-  const SUPABASE_ANON_KEY = typeof process !== 'undefined' ? process.env.NEXT_SUPABASE_ANON_KEY : '';
+  // Configuration
+  // In plain HTML, the browser cannot read process.env variables from Vercel.
+  // It is 100% safe to put your Supabase URL and Anon Key here because your RLS policies protect the data.
+  const SUPABASE_URL = 'https://vemognokcqejzvepqipy.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlbW9nbm9rY3Flanp2ZXBxaXB5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNzU3NDEsImV4cCI6MjA5MTc1MTc0MX0.QQqb6xE3uKq6dXyNOVTpLXc6qATyj0NborIid5bUKNI';
 
   // Check if credentials are missing
-  const isDemo = !SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_URL.includes('YOUR_PROJECT_ID');
+  const isDemo = !SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_URL.includes('PASTE_');
   
   let supabase = null;
   if (!isDemo) {
