@@ -1,1 +1,1 @@
-# jinga-waitlist
+# jinta-waitlist
